@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
+console.log(
+  "This is the process.env.MONGO_URI==========",
+  process.env.MONGO_URI
+);
 // Connect to your MongoDB database (make sure to replace the connection string with your own)
 mongoose
-  .connect("mongodb://localhost/categoryDB", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -45,6 +50,6 @@ async function getSubcategories(categoryId) {
   const laptops = await createCategory("Laptops", electronics);
   const android = await createCategory("Android", smartphones);
 
-  console.log(await getSubcategories(electronics._id));
-  console.log(await getSubcategories(smartphones._id));
+  //   console.log(await getSubcategories(electronics._id));
+  //   console.log(await getSubcategories(smartphones._id));
 })();
